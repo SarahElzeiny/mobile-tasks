@@ -2,7 +2,8 @@ import 'dart:io';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:untitled1/profile/user%20model.dart';
+import 'package:section/profile/user%20model.dart';
+
 
 
 import '../profile-widget/Opetions.dart';

@@ -1,6 +1,6 @@
 
 import 'dart:io';
-import 'package:untitled1/profile/user%20model.dart';
+import 'package:section/profile/user%20model.dart';
 import 'package:flutter/material.dart';
 class Opetions extends StatelessWidget {
   final String title;

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:untitled1/profile/user.dart';
+import 'package:section/profile/user.dart';
 
 class UserModel extends ChangeNotifier{
 
