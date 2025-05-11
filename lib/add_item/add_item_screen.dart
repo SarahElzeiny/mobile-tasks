@@ -7,6 +7,7 @@ import '../main.dart';
 import 'dart:io';
 
 import 'item.dart';
+
 class AddItemPage extends StatefulWidget {
   AddItemPage({super.key});
 
@@ -15,8 +16,6 @@ class AddItemPage extends StatefulWidget {
 }
 
 class _AddItemPageState extends State<AddItemPage> {
-
-
   TextEditingController title = TextEditingController();
   TextEditingController body = TextEditingController();
 
@@ -41,13 +40,13 @@ class _AddItemPageState extends State<AddItemPage> {
               title: title.text,
               body: body.text,
               favorite: false,
-            ),);
+            ),
+          );
           item.selectedImage!.clear();
-         Navigator.pushReplacement(
-           context,
-            MaterialPageRoute(
-              builder:
-                 (context) => DashboardScreen(),));
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => DashboardScreen()),
+          );
         },
       ),
       appBar: AppBar(backgroundColor: Colors.transparent),
@@ -59,94 +58,98 @@ class _AddItemPageState extends State<AddItemPage> {
           ),
         ),
         child: Consumer<ItemModel>(
-          builder: (context, itemModel, child) =>
-           ListView(
-            children: [
-              Row(
+          builder:
+              (context, itemModel, child) => ListView(
                 children: [
-                  Container(
-                    color: Colors.white38,
-                    height: 100,
-                    width: 100,
-                    child: IconButton(
-                      onPressed: () {
-                        itemModel.imageSelector();
-                      },
-                      icon: Icon(Icons.camera_alt),
+                  Row(
+                    children: [
+                      Container(
+                        color: Colors.white38,
+                        height: 100,
+                        width: 100,
+                        child: IconButton(
+                          onPressed: () {
+                            itemModel.imageSelector();
+                          },
+                          icon: Icon(Icons.camera_alt),
+                        ),
+                      ),
+                      SizedBox(height: 30),
+                    ],
+                  ),
+                  itemModel.selectedImage.isEmpty
+                      ? Container(
+                        color: Colors.white38,
+                        height: 150,
+                        width: MediaQuery.sizeOf(context).width - 20,
+                        child: IconButton(
+                          onPressed: () {
+                            itemModel.imageSelector();
+                          },
+                          icon: Icon(Icons.camera_alt),
+                        ),
+                      )
+                      : SizedBox(
+                        height: 100,
+                        width: MediaQuery.sizeOf(context).width - 120,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children:
+                              itemModel.selectedImage
+                                  .map(
+                                    (e) => Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0,
+                                          ),
+                                          child: Image.file(
+                                            e,
+                                            height: 100,
+                                            width: 100,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        IconButton(
+                                          onPressed: () {
+                                            itemModel.removeImage(
+                                              itemModel.selectedImage.indexOf(
+                                                e,
+                                              ),
+                                            );
+                                          },
+                                          icon: Icon(Icons.cancel),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                  .toList(),
+                        ),
+                      ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: title,
+                      decoration: InputDecoration(
+                        hintText: "title",
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: body,
+                      minLines: 3,
+                      maxLines: 6,
+                      decoration: InputDecoration(
+                        hintText: "body",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              itemModel.selectedImage.isEmpty
-                  ? Container(
-                    color: Colors.white38,
-                    height: 150,
-                    width: MediaQuery.sizeOf(context).width - 20,
-                    child: IconButton(
-                      onPressed: () {
-                       itemModel. imageSelector();
-                      },
-                      icon: Icon(Icons.camera_alt),
-                    ),
-                  )
-                  : SizedBox(
-                    height: 100,
-                    width: MediaQuery.sizeOf(context).width - 120,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children:
-                          itemModel.selectedImage
-                              .map(
-                                (e) => Stack(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0,
-                                      ),
-                                      child: Image.file(
-                                        e,
-                                        height: 100,
-                                        width: 100,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-itemModel.removeImage(itemModel.selectedImage.indexOf(e));
-                                      },
-                                      icon: Icon(Icons.cancel),
-                                    ),
-                                  ],
-                                ),
-                              )
-                              .toList(),
-                    ),
-                  ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: title,
-                  decoration: InputDecoration(
-                    hintText: "title",
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: body,
-                  minLines: 3,
-                  maxLines: 6,
-                  decoration: InputDecoration(
-                    hintText: "body",
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

@@ -1,15 +1,11 @@
 import 'dart:io';
 
 class Item {
-
-
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Item &&
-
-        other.title == title;
+    return other is Item && other.title == title;
   }
 
   @override
@@ -18,10 +14,10 @@ class Item {
 
   Item({
     required this.images,
-  required this.title,
-  required this.body,
-  required this.favorite,
-});
+    required this.title,
+    required this.body,
+    required this.favorite,
+  });
 
   List<File> images;
   String title;

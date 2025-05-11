@@ -9,18 +9,15 @@ import 'add_item/item_model.dart';
 
 void main() {
   runApp(
-      MultiProvider(
-          child: const MyApp()
-          ,providers: [
-            ChangeNotifierProvider(create: (context) => ItemModel(),),
-            ChangeNotifierProvider(create: (context) => UserModel(),),
-        ChangeNotifierProvider(create: (context) => FavoriteModel(),),
-      ]
-  )
-
-
-  )
-      ;
+    MultiProvider(
+      child: const MyApp(),
+      providers: [
+        ChangeNotifierProvider(create: (context) => ItemModel()),
+        ChangeNotifierProvider(create: (context) => UserModel()),
+        ChangeNotifierProvider(create: (context) => FavoriteModel()),
+      ],
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -37,6 +34,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
