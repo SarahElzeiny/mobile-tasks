@@ -23,36 +23,36 @@ class _ProfilePageState extends State<ProfilePage> {
           Center(
             child: Consumer<UserModel>(
               builder: (context, userModel, child) {
-                return Stack(
-                  alignment: Alignment.bottomRight,
+                return Column(
                   children: [
-                    CircleAvatar(
-                      radius: 100,
-                      child:
-                          userModel.user?.image == null
+                    Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        CircleAvatar(
+                          radius: 100,
+                          child: userModel.user?.image == null
                               ? Icon(
-                                Icons.person,
-                                size: 200,
-                                color: Colors.white38,
-                              )
+                            Icons.person,
+                            size: 200,
+                            color: Colors.white38,
+                          )
                               : ClipOval(
-                                child: Image.file(
-                                  userModel.user!.image!,
-                                  height: 200,
-                                  width: 200,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                    ),
-                    CircleAvatar(
-                      backgroundColor: Colors.black,
-                      radius: 25,
-                      child: IconButton(
-                        onPressed: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder:
-                                (context) => SizedBox(
+                            child: Image.file(
+                              userModel.user!.image!,
+                              height: 200,
+                              width: 200,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        CircleAvatar(
+                          backgroundColor: Colors.black,
+                          radius: 25,
+                          child: IconButton(
+                            onPressed: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (context) => SizedBox(
                                   height: 150,
                                   child: Column(
                                     children: [
@@ -63,7 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       Divider(),
                                       Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
+                                        MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Opetions(
                                             onPress: () {
@@ -88,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           if (userModel.user?.image != null)
                                             Opetions(
                                               selectedImage:
-                                                  userModel.user?.image,
+                                              userModel.user?.image,
                                               onPress: () {
                                                 userModel.removeImage();
                                                 Navigator.pop(context);
@@ -101,14 +101,33 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ],
                                   ),
                                 ),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.camera_alt,
-                          size: 40,
-                          color: Colors.white38,
+                              );
+                            },
+                            icon: Icon(
+                              Icons.camera_alt,
+                              size: 40,
+                              color: Colors.white38,
+                            ),
+                          ),
                         ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      userModel.user?.name ?? "No Name",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      userModel.user?.bio ?? "No bio added yet.",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[700],
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 );

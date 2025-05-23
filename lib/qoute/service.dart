@@ -17,3 +17,4 @@ Future<List<Quote>> fetchQuote() async {
 
   throw Exception("Failed to load quote");
 }
+

@@ -12,14 +12,34 @@ class UserModel extends ChangeNotifier {
 
   ImagePicker imagePicker = ImagePicker();
 
+  void createDefaultUser(String email) {
+    _user = User(
+      name: "Sarah Elzeiny",
+      image: null,
+      bio: "I love flutter",
+    );
+    notifyListeners();
+  }
+
+
+  // Create a user with all details
+  void createUser(String name, String bio, String email) {
+    _user = User(
+      name: name.isNotEmpty ? name : "User",
+      image: null,
+      bio: bio.isNotEmpty ? bio : "No bio added yet.",
+    );
+    notifyListeners();
+  }
+
   Future<void> imageSelector(ImageSource source) async {
     XFile? image = await imagePicker.pickImage(source: source);
     if (image != null) {
       if (_user == null) {
         _user = User(
-          name: "SarahElzeiny",
+          name: "Sarah Elzeiny",
           image: File(image.path),
-          bio: "i love coding.",
+          bio: "I love flutter",
         );
       } else {
         _user!.image = File(image.path);
@@ -30,6 +50,21 @@ class UserModel extends ChangeNotifier {
 
   void removeImage() {
     _user?.image = null;
+    notifyListeners();
+  }
+
+  // Update user profile
+  void updateProfile(String name, String bio) {
+    if (_user != null) {
+      _user!.name = name;
+      _user!.bio = bio;
+      notifyListeners();
+    }
+  }
+
+  // Logout user
+  void logout() {
+    _user = null;
     notifyListeners();
   }
 }

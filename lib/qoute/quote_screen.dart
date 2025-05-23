@@ -10,6 +10,12 @@ class QuoteScreen extends StatefulWidget {
 }
 
 class _QuoteScreenState extends State<QuoteScreen> {
+
+
+
+
+
+
   late Future<List<Quote>> future;
   @override
   void initState() {
