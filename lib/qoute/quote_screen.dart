@@ -32,7 +32,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/quote-back.jpg"),
+            image: AssetImage("assets/Quate.jpg"),
             fit: BoxFit.cover,
           ),
         ),

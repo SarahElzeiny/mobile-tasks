@@ -53,7 +53,7 @@ class _AddItemPageState extends State<AddItemPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/Tree-Back.jpeg"),
+            image: AssetImage("assets/add.jpg"),
             fit: BoxFit.cover,
           ),
         ),
@@ -129,9 +129,11 @@ class _AddItemPageState extends State<AddItemPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+
                       controller: title,
                       decoration: InputDecoration(
-                        hintText: "title",
+                        hintText:  "title",
+                        hintStyle: TextStyle(color: Colors.white),
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -144,6 +146,7 @@ class _AddItemPageState extends State<AddItemPage> {
                       maxLines: 6,
                       decoration: InputDecoration(
                         hintText: "body",
+                        hintStyle: TextStyle(color: Colors.white),
                         border: OutlineInputBorder(),
                       ),
                     ),

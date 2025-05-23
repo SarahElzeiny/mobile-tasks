@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:section/details/details-screen/details_page.dart';
 import 'package:section/details/details-widget/favorite.dart';
+import 'package:section/favorite/favorite_model.dart';
+import 'package:section/favorite/favorite_screen.dart';
 import '../add_item/add_item_screen.dart';
 import '../add_item/item.dart';
 import '../add_item/item_model.dart';
@@ -20,6 +22,33 @@ class DashboardScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Dash Board"),
         actions: [
+          Consumer<FavoriteModel>(
+            builder: (context, fav, _) => Stack(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.favorite),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => FavoriteScreen()),
+                  ),
+                ),
+                if (fav.fav.isNotEmpty)
+                  Positioned(
+                    right: 6,
+                    top: 6,
+                    child: CircleAvatar(
+                      radius: 10,
+                      backgroundColor: Colors.red,
+                      child: Text(
+                        '${fav.fav.length}',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+
           IconButton(
             onPressed: () {
               Navigator.push(
@@ -91,13 +120,16 @@ class DashboardScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddItemPage()),
           );
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.add,
+        color: Colors.white,
+        ),
       ),
     );
   }

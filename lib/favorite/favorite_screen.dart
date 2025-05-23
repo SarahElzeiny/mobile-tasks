@@ -10,43 +10,60 @@ class FavoriteScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Favorite")),
       body: Consumer<FavoriteModel>(
-        builder:
-            (context, fav, child) => GridView.builder(
+        builder: (context, fav, child) {
+
+          if (fav.fav.isEmpty) {
+            return Center(
+              child:
+              Text(
+                "No favorite",
+                style: TextStyle(fontSize: 18, color: Colors.grey),
+              ),
+            );
+
+          } else {
+            return GridView.builder(
+              padding: EdgeInsets.all(10),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 0.9,
               ),
               itemCount: fav.fav.length,
               itemBuilder: (context, index) {
-                return SizedBox(
-                  child: Column(
-                    children: [
-                      Image.file(
-                        fav.fav[index].images.first,
-                        height: 125,
-                        width: 200,
-                        fit: BoxFit.cover,
-                      ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(fav.fav[index].title),
-                          IconButton(
-                            onPressed: () {
-                              fav.fav[index].favorite = false;
-
-                              fav.remove(fav.fav[index]);
-                            },
-                            icon: Icon(Icons.favorite, color: Colors.red),
+                return Column(
+                  children: [
+                    Image.file(
+                      fav.fav[index].images.first,
+                      height: 125,
+                      width: 200,
+                      fit: BoxFit.cover,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            fav.fav[index].title,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            fav.fav[index].favorite = false;
+                            fav.remove(fav.fav[index]);
+                          },
+                          icon: Icon(Icons.favorite, color: Colors.red),
+                        ),
+                      ],
+                    ),
+                  ],
                 );
               },
-            ),
+            );
+          }
+        },
       ),
     );
   }
